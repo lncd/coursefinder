@@ -4,7 +4,7 @@ class Import extends CI_Controller {
 
 	public function keywords()
 	{
-		$results = json_decode(file_get_contents('http://n2/keywords'));
+		$results = json_decode(file_get_contents( $_SERVER['CF_N2_ENDPOINT'] . 'keywords'));
 
 		foreach($results->results as $keyword)
 		{
@@ -20,7 +20,7 @@ class Import extends CI_Controller {
 
 	public function keyword_course_links()
 	{
-		$results = json_decode(file_get_contents('http://n2/keyword_course_links'));
+		$results = json_decode(file_get_contents( $_SERVER['CF_N2_ENDPOINT'] . 'keyword_course_links'));
 
 		foreach($results->results as $link)
 		{
@@ -46,7 +46,7 @@ class Import extends CI_Controller {
 		
 		for($i = 0; $i <= 10; $i++)
 		{
-			$results = json_decode(file_get_contents('http://n2/keywords/related_courses?relevance_gte=' . $min[$i] . '&relevance_lt=' . $max[$i] . '&ignore_type_id=1,2,3,4,6,24,29,33,8,20'));
+			$results = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'related_courses?relevance_gte=' . $min[$i] . '&relevance_lt=' . $max[$i] . '&ignore_type_id=1,2,3,4,6,24,29,33,8,20'));
 
 			foreach($results->results as $similar)
 			{

@@ -97,7 +97,7 @@ class Search extends CI_Controller {
 
 	function test()
 	{
-		$results = json_decode(file_get_contents('http://n2/programmes/course_code/' . 64));
+		$results = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'programmes/course_code/' . 64));
 		echo '<pre>';
 		print_r($results->result);
 		echo '</pre>';

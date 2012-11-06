@@ -4,7 +4,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$jacs_codes = json_decode(file_get_contents('http://n2/jacs_codes?code_like=000'));
+		$jacs_codes = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'jacs_codes?code_like=000'));
 		
 		$data['codes'] = array();
 		foreach($jacs_codes->results as $jacs_code)
