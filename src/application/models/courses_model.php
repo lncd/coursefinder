@@ -12,6 +12,16 @@
 * @link      coursedata.blogs.lincoln.ac.uk
 */
 
+/**
+* Courses_model
+*
+* @category Course_Finder
+* @package Course_Finder
+* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license GNU Affero General Public License 3.0
+* @link coursedata.blogs.lincoln.ac.uk
+*
+*/
 class Courses_model extends CI_Model
 {
     /**

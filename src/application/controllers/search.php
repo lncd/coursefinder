@@ -12,6 +12,16 @@
 * @link      coursedata.blogs.lincoln.ac.uk
 */
 
+/**
+* Search
+*
+* @category Course_Finder
+* @package Course_Finder
+* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license GNU Affero General Public License 3.0
+* @link coursedata.blogs.lincoln.ac.uk
+*
+*/
 class Search extends CI_Controller {
 
 	/**
@@ -66,23 +76,23 @@ class Search extends CI_Controller {
 		$count_keywords = count($keywords);
 
 		//Construct search object
-		$s = new Search_instance;
-		$s->search_time = time();
-		$s->parameter_count = $count_studied + $count_interested + $count_keywords;
-		$s->save();
+		$search_instance = new Search_instance;
+		$search_instance->search_time = time();
+		$search_instance->parameter_count = $count_studied + $count_interested + $count_keywords;
+		$search_instance->save();
 
 		//Save current search instance, for tracking click throughs and recommends etc.
-		$this->session->set_userdata(array('search_id' => $s->id));
+		$this->session->set_userdata(array('search_id' => $search_instance->id));
 
 		if($this->input->post('studied'))
 		{
 			foreach($this->input->post('studied') as $studied)
 			{
 				//Save search parameters
-				$ss = new Search_studied;
-				$ss->search_id = $s->id;
-				$ss->jacs_code_id = $studied;
-				$ss->save();
+				$search_studied = new Search_studied;
+				$search_studied->search_id = $search_instance->id;
+				$search_studied->jacs_code_id = $studied;
+				$search_studied->save();
 
 				//Get courses by JACS code
 				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($studied);
@@ -94,10 +104,10 @@ class Search extends CI_Controller {
 			foreach($this->input->post('interested') as $interested)
 			{
 				//Save search parameters
-				$si = new Search_interest;
-				$si->search_id = $s->id;
-				$si->jacs_code_id = $interested;
-				$si->save();
+				$search_interest = new Search_interest;
+				$search_interest->search_id = $search_instance->id;
+				$search_interest->jacs_code_id = $interested;
+				$search_interest->save();
 
 				//Get courses by JACS code
 				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($interested);
@@ -109,10 +119,10 @@ class Search extends CI_Controller {
 			foreach($keywords as $keyword)
 			{
 				//Save search parameters
-				$sk = new Search_keyword;
-				$sk->search_id = $s->id;
-				$sk->keyword_id = $keyword;
-				$sk->save();
+				$search_keyword = new Search_keyword;
+				$search_keyword->search_id = $search_instance->id;
+				$search_keyword->keyword_id = $keyword;
+				$search_keyword->save();
 
 				$results[] = $this->keyword_model->get_course_ids_by_keyword($keyword, 0.5);
 			}
@@ -125,3 +135,6 @@ class Search extends CI_Controller {
 		$this->load->view('footer');
 	}
 }
+
+// End of file search.php
+// Location: ./controllers/search.php

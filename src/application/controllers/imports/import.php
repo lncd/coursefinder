@@ -1,42 +1,82 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+/**
+* Import
+*
+* PHP Version 5
+* 
+* @category  Course_Finder
+* @package   Course_Finder
+* @author    Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @copyright 2012 University of Lincoln
+* @license   GNU Affero General Public License 3.0
+* @link      coursedata.blogs.lincoln.ac.uk
+*/
 
-class Import extends CI_Controller {
-
+/**
+* Import
+*
+* @category Course_Finder
+* @package Course_Finder
+* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license GNU Affero General Public License 3.0
+* @link coursedata.blogs.lincoln.ac.uk
+*
+*/
+class Import extends CI_Controller
+{
+	/**
+    * Imports Keywords. 
+    *
+    * @return Nothing
+    * @access Public
+    */
 	public function keywords()
 	{
 		$results = json_decode(file_get_contents( $_SERVER['CF_N2_ENDPOINT'] . 'keywords'));
 
 		foreach($results->results as $keyword)
 		{
-			$k = new Keyword();
-			$k->where('n2_id', $keyword->id)->get();
-			$k->n2_id = (int) $keyword->id;
-			$k->keyword = $keyword->keyword;
-			$k->save();
+			$keyword = new Keyword();
+			$keyword->where('n2_id', $keyword->id)->get();
+			$keyword->n2_id = (int) $keyword->id;
+			$keyword->keyword = $keyword->keyword;
+			$keyword->save();
 
-			unset($k);
+			unset($keyword);
 		}
 	}
 
+	/**
+    * Imports Course Links. 
+    *
+    * @return Nothing
+    * @access Public
+    */
 	public function keyword_course_links()
 	{
 		$results = json_decode(file_get_contents( $_SERVER['CF_N2_ENDPOINT'] . 'keyword_course_links'));
 
 		foreach($results->results as $link)
 		{
-			$kl = new Keyword_course_link;
-			$kl->where('n2_id', $link->id)->get();
-			$kl->n2_id = $link->id;
-			$kl->keyword_id = $link->keyword_id;
-			$kl->course_id = $link->course_code_id;
-			$kl->relevance = $link->relevance;
-			$kl->keyword_count = $link->count;
-			$kl->save();
+			$keyword_course_link = new Keyword_course_link;
+			$keyword_course_link->where('n2_id', $link->id)->get();
+			$keyword_course_link->n2_id = $link->id;
+			$keyword_course_link->keyword_id = $link->keyword_id;
+			$keyword_course_link->course_id = $link->course_code_id;
+			$keyword_course_link->relevance = $link->relevance;
+			$keyword_course_link->keyword_count = $link->count;
+			$keyword_course_link->save();
 
-			unset($kl);
+			unset($keyword_course_link);
 		}
 	}
 
+	/**
+    * Imports Similar Courses. 
+    *
+    * @return Nothing
+    * @access Public
+    */
 	public function similar_courses()
 	{
 		ini_set('memory_limit', '128M');
@@ -50,20 +90,23 @@ class Import extends CI_Controller {
 
 			foreach($results->results as $similar)
 			{
-				$s = new Similar_course;
-				$s->where('source_course_id', $similar->source_course_id);
-				$s->where('target_course_id', $similar->target_course_id);
-				$s->where('keyword_id', (int) $similar->keyword_id);
-				$s->get();
-				$s->source_course_id = $similar->source_course_id;
-				$s->target_course_id = $similar->target_course_id;
-				$s->keyword_id = $similar->keyword_id;
-				$s->min_relevance = $min[$i];
-				$s->save();
+				$similar = new Similar_course;
+				$similar->where('source_course_id', $similar->source_course_id);
+				$similar->where('target_course_id', $similar->target_course_id);
+				$similar->where('keyword_id', (int) $similar->keyword_id);
+				$similar->get();
+				$similar->source_course_id = $similar->source_course_id;
+				$similar->target_course_id = $similar->target_course_id;
+				$similar->keyword_id = $similar->keyword_id;
+				$similar->min_relevance = $min[$i];
+				$similar->save();
 
-				unset($s);
+				unset($similar);
 			}
 			unset($results);
 		}
 	}
 }
+
+// End of file import.php
+// Location: ./controllers/imports/import.php

@@ -1,15 +1,26 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 /**
 * Home
 *
 * PHP Version 5
 * 
-* @category  Course Finder
-* @package   Course Finder
+* @category  Course_Finder
+* @package   Course_Finder
 * @author    Jamie Mahoney <jmahoney@lincoln.ac.uk>
 * @copyright 2012 University of Lincoln
 * @license   GNU Affero General Public License 3.0
 * @link      coursedata.blogs.lincoln.ac.uk
+*/
+
+/**
+* Home
+*
+* @category Course_Finder
+* @package Course_Finder
+* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license GNU Affero General Public License 3.0
+* @link coursedata.blogs.lincoln.ac.uk
+*
 */
 class Home extends CI_Controller {
 
@@ -34,3 +45,6 @@ class Home extends CI_Controller {
 		$this->load->view('footer');
 	}
 }
+
+// End of file home.php
+// Location: ./controllers/home.php

@@ -4,14 +4,24 @@
 *
 * PHP Version 5
 * 
-* @category  Course Finder
-* @package   Course Finder
+* @category  Course_Finder
+* @package   Course_Finder
 * @author    Jamie Mahoney <jmahoney@lincoln.ac.uk>
 * @copyright 2012 University of Lincoln
 * @license   GNU Affero General Public License 3.0
 * @link      coursedata.blogs.lincoln.ac.uk
 */
 
+/**
+* Course
+*
+* @category Course_Finder
+* @package Course_Finder
+* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license GNU Affero General Public License 3.0
+* @link coursedata.blogs.lincoln.ac.uk
+*
+*/
 class Course extends CI_Controller {
 
     /**
@@ -22,21 +32,21 @@ class Course extends CI_Controller {
     */
 	public function index()
 	{
-		if($this->uri->segment(2))
-		{
-			$this->load->model('courses_model');
+        if($this->uri->segment(2))
+        {
+            $this->load->model('courses_model');
 
-			if($this->session->userdata('search_id'))
-			{
-				$this->courses_model->add_course_click_through($this->session->userdata('search_id'), $this->uri->segment(2));
-			}
+            if($this->session->userdata('search_id'))
+            {
+            	$this->courses_model->add_course_click_through($this->session->userdata('search_id'), $this->uri->segment(2));
+            }
 
-			$data['course'] = $this->courses_model->get_course_overview($this->uri->segment(2));
-			$data['similar'] = $this->courses_model->get_similar_courses($this->uri->segment(2));
-			$this->load->view('header');
-			$this->load->view('course', $data);
-			$this->load->view('footer');
-		}
+            $data['course'] = $this->courses_model->get_course_overview($this->uri->segment(2));
+            $data['similar'] = $this->courses_model->get_similar_courses($this->uri->segment(2));
+            $this->load->view('header');
+            $this->load->view('course', $data);
+            $this->load->view('footer');
+        }
 	}
 
     /**
@@ -129,7 +139,7 @@ class Course extends CI_Controller {
             $si_interest->or_where_related('search_studied', 'jacs_code_id', $studied->stored->jacs_code_id);
     	}
 
-        $kwords = $sik->get_iterated();
+        $kwords = $si_keyword->get_iterated();
 
         foreach($kwords as $kword)
         {
@@ -175,3 +185,6 @@ class Course extends CI_Controller {
 	}
 
 }
+
+// End of file course.php
+// Location: ./controllers/course.php
