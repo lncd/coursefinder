@@ -24,17 +24,23 @@
 class Keyword extends DataMapper {
 
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var string
 	*/
 	var $table = 'keywords';
 
 	/**
+	* Array containing related elements.
+	*
 	* @var array
 	*/
 	var $has_one = array(
 	);
 
 	/**
+	* Array containing related elements.
+	*
 	* @var array
 	*/
 	var $has_many = array(

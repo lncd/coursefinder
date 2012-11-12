@@ -39,6 +39,8 @@ class Jacs_model extends CI_Model
 	/**
 	* Get course IDs from JACS code
 	*
+	* @param string $code The JACS code
+	*
 	* @return Nothing
 	* @access Public
 	*/

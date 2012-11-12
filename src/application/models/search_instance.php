@@ -25,16 +25,22 @@
 class Search_instance extends DataMapper {
 
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var String
 	*/
 	var $table = 'search_instances';
 
 	/**
-	* @var Arrat
+	* Array containing associated elements.
+	*
+	* @var Array
 	*/
 	var $has_one = array();
 
 	/**
+	* Array containing associated elements.
+	*
 	* @var Array
 	*/
 	var $has_many = array(

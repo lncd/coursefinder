@@ -24,11 +24,15 @@
 class Search_keyword extends DataMapper {
 
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var String
 	*/
 	var $table = 'search_keywords';
 
 	/**
+	* Array contaning associated elements.
+	*
 	* @var Array
 	*/
 	var $has_one = array(

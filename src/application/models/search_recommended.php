@@ -25,11 +25,15 @@
 class Search_recommended extends DataMapper {
 
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var String
 	*/
 	var $table = 'search_recommended';
 
 	/**
+	* Array contaning associated elements.
+	*
 	* @var Array
 	*/
 	var $has_many = array(

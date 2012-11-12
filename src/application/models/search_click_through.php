@@ -25,11 +25,15 @@
 class Search_click_through extends DataMapper {
 
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var String
 	*/
 	var $table = 'search_click_throughs';
 
 	/**
+	* Array containing associated elements.
+	*
 	* @var Array
 	*/
 	var $has_one = array(

@@ -25,11 +25,15 @@
 class Search_studied extends DataMapper {
 
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var String
 	*/
 	var $table = 'search_studied';
 
 	/**
+	* Array containing associated elements.
+	*
 	* @var Array
 	*/
 	var $has_one = array(

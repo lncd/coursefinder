@@ -24,11 +24,15 @@
 class Keyword_course_link extends DataMapper {
 
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var string
 	*/
 	var $table = 'keyword_course_links';
 
 	/**
+	* Array containing associated elements.
+	*
 	* @var array
 	*/
 	var $has_one = array(

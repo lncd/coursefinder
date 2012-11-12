@@ -54,7 +54,7 @@ class Keyword_model extends CI_Model
 			$json_string.= '{"id": ' . $result->id . ',"name":"' . $result->keyword . '"},';
 		}
 
-		$json_string = substr_replace($json_string ,"",-1);
+		$json_string = substr_replace($json_string, "", -1);
 		$json_string.= ']';
 		return $json_string;
 	}

@@ -25,6 +25,8 @@
 class Similar_course extends DataMapper
 {
 	/**
+	* Name of the table that the model uses.
+	*
 	* @var string
 	*/
 	var $table = 'similar_courses';
