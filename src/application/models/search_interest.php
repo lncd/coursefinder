@@ -27,14 +27,14 @@ class Search_interest extends DataMapper {
 	/**
 	* Name of the table that the model uses.
 	*
-	* @var String
+	* @var string
 	*/
 	var $table = 'search_interests';
 
 	/**
 	* Array contaning associated elements.
 	*
-	* @var Array
+	* @var array
 	*/
 	var $has_one = array(
 		'search_instance' => array()

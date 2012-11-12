@@ -54,7 +54,7 @@ class Keyword_model extends CI_Model
 			$json_string.= '{"id": ' . $result->id . ',"name":"' . $result->keyword . '"},';
 		}
 
-		$json_string = substr_replace($json_string, "", -1);
+		$json_string = substr_replace($json_string, '', -1);
 		$json_string.= ']';
 		return $json_string;
 	}
@@ -69,10 +69,10 @@ class Keyword_model extends CI_Model
 	*/
 	function get_courses_all_keywords($keywords)
 	{
-		$k = new Keyword;
-		$k->where_in('id', $keywords);
-		$k->limit(25);
-		$k->get();
+		$keyword = new Keyword;
+		$keyword->where_in('id', $keywords);
+		$keyword->limit(25);
+		$keyword->get();
 	}
 
 	/**
@@ -86,11 +86,11 @@ class Keyword_model extends CI_Model
 	*/
 	function get_course_ids_by_keyword($keyword_id, $relevance = 0.5)
 	{
-		$kc = new Keyword_course_link;
-		$kc->where('keyword_id', (int) $keyword_id);
-		$kc->where('relevance >=', $relevance);
+		$kc_link = new Keyword_course_link;
+		$kc_link->where('keyword_id', (int) $keyword_id);
+		$kc_link->where('relevance >=', $relevance);
 
-		$links = $kc->get_iterated();
+		$links = $kc_link->get_iterated();
 
 		$returning = array();
 
