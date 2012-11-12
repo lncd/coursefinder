@@ -106,27 +106,27 @@ class Course extends CI_Controller {
         
 
 		//Get all keywords for this search
-        $k = new Search_keyword;
-        $sik = new Search_instance;
-        $sin = new Search_instance;
-        $sis = new Search_instance;
+        $keyword = new Search_keyword;
+        $si_keywword = new Search_instance;
+        $si_interest = new Search_instance;
+        $si_studied = new Search_instance;
 
-        $k->where('search_instance_id', $search_id);
-        $keywords = $k->get_iterated();
+        $keyword->where('search_instance_id', $search_id);
+        $keywords = $keywords->get_iterated();
 
         foreach($keywords as $keyword)
         {
-            $sik->or_where_related('search_keywords', 'keyword_id', $keyword->stored->keyword_id);
+            $si_keywword->or_where_related('search_keywords', 'keyword_id', $keyword->stored->keyword_id);
         }
 
         //Get all studied for this search
-    	$ss = new Search_studied;
-    	$ss->where('search_instance_id', $search_id);
-    	$studieds = $ss->get_iterated();
+        $search_stud = new Search_studied;
+        $search_stud->where('search_instance_id', $search_id);
+        $studieds = $search_stud->get_iterated();
 
     	foreach($studieds as $studied)
     	{
-            $sin->or_where_related('search_studied', 'jacs_code_id', $studied->stored->jacs_code_id);
+            $si_interest->or_where_related('search_studied', 'jacs_code_id', $studied->stored->jacs_code_id);
     	}
 
         $kwords = $sik->get_iterated();
@@ -137,18 +137,18 @@ class Course extends CI_Controller {
         }
 
         //Get all interested for this search
-    	$si = new Search_interest;
-    	$si->where('search_instance_id', $search_id);
-    	$interesteds = $si->get_iterated();
+        $search_interest = new Search_interest;
+    	$search_interest->where('search_instance_id', $search_id);
+    	$interesteds = $search_interest->get_iterated();
 
     	foreach($interesteds as $interested)
     	{
-            $sis->or_where_related('search_interest', 'jacs_code_id', $interested->stored->jacs_code_id);
+            $si_studied->or_where_related('search_interest', 'jacs_code_id', $interested->stored->jacs_code_id);
     	}
 
         //First, check if any searches match all of the keywords and subjects for this particular search
 
-        $searches = $sik->get_iterated();
+        $searches = $si_keywword->get_iterated();
 
 
         echo '<pre>';

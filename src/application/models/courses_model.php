@@ -50,7 +50,7 @@ class Courses_model extends CI_Model
     /**
     * Get overview information of a single course.
     *
-    * @param int $id A course ID.
+    * @param int $course_id A course ID.
     *
     * @return Array containing overview of course information.
     * @access Public
@@ -169,5 +169,5 @@ class Courses_model extends CI_Model
     }
 }
 
-// End of file course_model.php
+// End of file courses_model.php
 // Location: ./models/courses_model.php
