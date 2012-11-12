@@ -16,20 +16,20 @@
 * Search
 *
 * @category Course_Finder
-* @package Course_Finder
-* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
-* @license GNU Affero General Public License 3.0
-* @link coursedata.blogs.lincoln.ac.uk
-*
+* @package  Course_Finder
+* @author   Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license  GNU Affero General Public License 3.0
+* @link     coursedata.blogs.lincoln.ac.uk
 */
+
 class Search extends CI_Controller {
 
 	/**
-    * Default function for controller. 
-    *
-    * @return Nothing
-    * @access Public
-    */
+	* Default function for controller. 
+	*
+	* @return Nothing
+	* @access Public
+	*/
 	public function index()
 	{	
 		$this->load->view('header');
@@ -38,11 +38,11 @@ class Search extends CI_Controller {
 	}
 
 	/**
-    * Get keywords
-    *
-    * @return Nothing
-    * @access Public
-    */
+	* Get keywords
+	*
+	* @return Nothing
+	* @access Public
+	*/
 	public function keyword()
 	{
 		$search_term = $this->input->get('q');
@@ -54,11 +54,11 @@ class Search extends CI_Controller {
 	}
 
 	/**
-    * Orchestrates a search and shows results
-    *
-    * @return Nothing
-    * @access Public
-    */
+	* Orchestrates a search and shows results
+	*
+	* @return Nothing
+	* @access Public
+	*/
 	public function results()
 	{
 		$this->load->model('keyword_model');

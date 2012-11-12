@@ -16,20 +16,20 @@
 * Import
 *
 * @category Course_Finder
-* @package Course_Finder
-* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
-* @license GNU Affero General Public License 3.0
-* @link coursedata.blogs.lincoln.ac.uk
-*
+* @package  Course_Finder
+* @author   Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license  GNU Affero General Public License 3.0
+* @link     coursedata.blogs.lincoln.ac.uk
 */
+
 class Import extends CI_Controller
 {
 	/**
-    * Imports Keywords. 
-    *
-    * @return Nothing
-    * @access Public
-    */
+	* Imports Keywords. 
+	*
+	* @return Nothing
+	* @access Public
+	*/
 	public function keywords()
 	{
 		$results = json_decode(file_get_contents( $_SERVER['CF_N2_ENDPOINT'] . 'keywords'));
@@ -47,11 +47,11 @@ class Import extends CI_Controller
 	}
 
 	/**
-    * Imports Course Links. 
-    *
-    * @return Nothing
-    * @access Public
-    */
+	* Imports Course Links. 
+	*
+	* @return Nothing
+	* @access Public
+	*/
 	public function keyword_course_links()
 	{
 		$results = json_decode(file_get_contents( $_SERVER['CF_N2_ENDPOINT'] . 'keyword_course_links'));
@@ -72,11 +72,11 @@ class Import extends CI_Controller
 	}
 
 	/**
-    * Imports Similar Courses. 
-    *
-    * @return Nothing
-    * @access Public
-    */
+	* Imports Similar Courses. 
+	*
+	* @return Nothing
+	* @access Public
+	*/
 	public function similar_courses()
 	{
 		ini_set('memory_limit', '128M');

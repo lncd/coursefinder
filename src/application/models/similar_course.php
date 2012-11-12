@@ -16,15 +16,17 @@
 * Similar Course
 *
 * @category Course_Finder
-* @package Course_Finder
-* @author Jamie Mahoney <jmahoney@lincoln.ac.uk>
-* @license GNU Affero General Public License 3.0
-* @link coursedata.blogs.lincoln.ac.uk
-*
+* @package  Course_Finder
+* @author   Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license  GNU Affero General Public License 3.0
+* @link     coursedata.blogs.lincoln.ac.uk
 */
+
 class Similar_course extends DataMapper
 {
-	//Table
+	/**
+	* Table used for the model.
+	*/
 	var $table = 'similar_courses';
 
 }
