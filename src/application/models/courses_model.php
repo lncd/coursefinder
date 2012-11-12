@@ -4,8 +4,8 @@
 *
 * PHP Version 5
 * 
-* @category  Course Finder
-* @package   Course Finder
+* @category  Course_Finder
+* @package   Course_Finder
 * @author    Jamie Mahoney <jmahoney@lincoln.ac.uk>
 * @copyright 2012 University of Lincoln
 * @license   GNU Affero General Public License 3.0
@@ -25,7 +25,7 @@ class Courses_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
     }
-    
+
     /**
     * Get overview information of an array of courses
     *
@@ -41,7 +41,7 @@ class Courses_model extends CI_Model
         foreach($id_array as $key => $value)
         {
             $results = json_decode(file_get_contents('http://n2/programmes/course_code/' . $key));
-            $returning[$value][] = array('id' => $key, 'title' => substr_replace($results->result->course_title, "", -8));
+            $returning[$value][] = array('id' => $key, 'title' => substr_replace($results->result->course_title, '', -8));
         }
 
         return $returning;
@@ -55,9 +55,9 @@ class Courses_model extends CI_Model
     * @return Array containing overview of course information.
     * @access Public
     */
-    function get_course($id)
+    function get_course($course_id)
     {
-        return array('data' => json_decode(file_get_contents('http://n2/programmes/course_code/' . $id)), 'recommended' => $this->check_recommended($id, $this->session->userdata('search_id')));
+        return array('data' => json_decode(file_get_contents('http://n2/programmes/course_code/' . $course_id)), 'recommended' => $this->check_recommended($course_id, $this->session->userdata('search_id')));
     }
 
     /**
@@ -71,10 +71,10 @@ class Courses_model extends CI_Model
     */
     function add_course_click_through($search_id, $course_id)
     {
-        $sc = new Search_click_through;
-        $sc->search_id = (int) $search_id;
-        $sc->course_id = (int) $course_id;
-        $sc->save();
+        $search_click = new Search_click_through;
+        $search_click->search_id = (int) $search_id;
+        $search_click->course_id = (int) $course_id;
+        $search_click->save();
     }
 
     /**
@@ -88,18 +88,18 @@ class Courses_model extends CI_Model
     */
     function get_similar_courses($course_id, $relevance = 0.5)
     {
-        $sc = new Similar_course;
-        $sc->where('source_course_id', $course_id);
-        $sc->where('min_relevance >=', $relevance);
-        $sc->group_by('target_course_id');
-        $courses = $sc->get_iterated();
+        $similar_course = new Similar_course;
+        $similar_course->where('source_course_id', $course_id);
+        $similar_course->where('min_relevance >=', $relevance);
+        $similar_course->group_by('target_course_id');
+        $courses = $similar_course->get_iterated();
 
         $results = array();
 
         foreach($courses as $course)
         {
             $course_info = json_decode(file_get_contents('http://n2/programmes/course_code/' . $course->stored->target_course_id));
-            $results[] = array('id' => $course->stored->target_course_id, 'title' => substr_replace($course_info->result->course_title, "", -8));
+            $results[] = array('id' => $course->stored->target_course_id, 'title' => substr_replace($course_info->result->course_title, '', -8));
         }
 
         return $results;
@@ -116,13 +116,14 @@ class Courses_model extends CI_Model
     */
     function recommend($course_id, $search_id)
     {
-        $sr = new Search_recommended;
-        $sr->where('course_id', (int) $course_id);
-        $sr->where('search_id', (int) $search_id);
-        $sr->get();
-        $sr->course_id = (int) $course_id;
-        $sr->search_id = (int) $search_id;
-        $sr->save();
+        $search_rec = new Search_recommended;
+        $search_rec->where('course_id', (int) $course_id);
+        $search_rec->where('search_id', (int) $search_id);
+        $search_rec->get();
+
+        $search_rec->course_id = (int) $course_id;
+        $search_rec->search_id = (int) $search_id;
+        $search_rec->save();
     }
 
     /**
@@ -136,11 +137,11 @@ class Courses_model extends CI_Model
     */
     function unrecommend($course_id, $search_id)
     {
-        $sr = new Search_recommended;
-        $sr->where('course_id', $course_id);
-        $sr->where('search_id', $search_id);
-        $sr->get();
-        $sr->delete();
+        $search_rec = new Search_recommended;
+        $search_rec->where('course_id', $course_id);
+        $search_rec->where('search_id', $search_id);
+        $search_rec->get();
+        $search_rec->delete();
     }
 
     /**
@@ -154,10 +155,10 @@ class Courses_model extends CI_Model
     */
     function check_recommended($course_id, $search_id)
     {
-        $sr = new Search_recommended();
-        $sr->get_where(array('course_id' => $course_id, 'search_id' => $search_id));
+        $search_rec = new Search_recommended();
+        $search_rec->get_where(array('course_id' => $course_id, 'search_id' => $search_id));
         
-        if(isset($sr->course_id))
+        if(isset($search_rec->course_id))
         {
             return TRUE;
         }
@@ -168,4 +169,5 @@ class Courses_model extends CI_Model
     }
 }
 
-//EOF
+// End of file course_model.php
+// Location: ./models/courses_model.php
