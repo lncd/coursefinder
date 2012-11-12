@@ -81,12 +81,12 @@ class Import extends CI_Controller
 	{
 		ini_set('memory_limit', '128M');
 
-		$min = array(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0);
-		$max = array(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1);
+		$minimum = array(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0);
+		$maximum = array(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1);
 		
 		for($i = 0; $i <= 10; $i++)
 		{
-			$results = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'related_courses?relevance_gte=' . $min[$i] . '&relevance_lt=' . $max[$i] . '&ignore_type_id=1,2,3,4,6,24,29,33,8,20'));
+			$results = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'related_courses?relevance_gte=' . $minimum[$i] . '&relevance_lt=' . $maximum[$i] . '&ignore_type_id=1,2,3,4,6,24,29,33,8,20'));
 
 			foreach($results->results as $similar)
 			{
@@ -98,7 +98,7 @@ class Import extends CI_Controller
 				$similar->source_course_id = $similar->source_course_id;
 				$similar->target_course_id = $similar->target_course_id;
 				$similar->keyword_id = $similar->keyword_id;
-				$similar->min_relevance = $min[$i];
+				$similar->min_relevance = $minimum[$i];
 				$similar->save();
 
 				unset($similar);

@@ -48,10 +48,10 @@ class Courses_model extends CI_Model
 	{
 		$returning = array();
 
-		foreach($id_array as $key => $value)
+		foreach($id_array as $a_key => $value)
 		{
-			$results = json_decode(file_get_contents('http://n2/programmes/course_code/' . $key));
-			$returning[$value][] = array('id' => $key, 'title' => substr_replace($results->result->course_title, '', -8));
+			$results = json_decode(file_get_contents('http://n2/programmes/course_code/' . $a_key));
+			$returning[$value][] = array('id' => $a_key, 'title' => substr_replace($results->result->course_title, '', -8));
 		}
 
 		return $returning;

@@ -1,12 +1,50 @@
 <?php
+/**
+* Keyword Model
+*
+* PHP Version 5
+* 
+* @category  Course_Finder
+* @package   Course_Finder
+* @author    Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @copyright 2012 University of Lincoln
+* @license   GNU Affero General Public License 3.0
+* @link      coursedata.blogs.lincoln.ac.uk
+*/
+
+/**
+* Keyword Model
+*
+* @category Course_Finder
+* @package  Course_Finder
+* @author   Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @license  GNU Affero General Public License 3.0
+* @link     coursedata.blogs.lincoln.ac.uk
+*/
+
 class Keyword_model extends CI_Model
 {
+
+	/**
+	* Constructor
+	*
+	* @return Nothing
+	* @access Public
+	*/
 	function __construct()
 	{
 		// Call the Model constructor
 		parent::__construct();
 	}
 	
+	/**
+	* Get like keywords
+	*
+	* @param string $term The term to search for
+	*
+	* @return A JSON string containing like keywords
+	* @access Public
+	*/
 	function get_like_keywords_json($term)
 	{
 		$results = $this->db->like('keyword', $term)->limit(10)->get('keywords');
@@ -21,6 +59,14 @@ class Keyword_model extends CI_Model
 		return $json_string;
 	}
 
+	/**
+	* Get courses that match ALL of the keywords specified
+	*
+	* @param array $keywords An array of keywords
+	*
+	* @return None
+	* @access Public
+	*/
 	function get_courses_all_keywords($keywords)
 	{
 		$k = new Keyword;
@@ -29,6 +75,15 @@ class Keyword_model extends CI_Model
 		$k->get();
 	}
 
+	/**
+	* Get courses that match a specific keyword for a defined relevancy
+	*
+	* @param int   $keyword_id The ID of a keyword
+	* @param float $relevance  The minimum relevancy score that a link needs to be considered
+	*
+	* @return None
+	* @access Public
+	*/
 	function get_course_ids_by_keyword($keyword_id, $relevance = 0.5)
 	{
 		$kc = new Keyword_course_link;
@@ -47,6 +102,14 @@ class Keyword_model extends CI_Model
 		return $returning;
 	}
 
+	/**
+	* Prioritises results
+	*
+	* @param array $input An array of results to order and prioritise
+	*
+	* @return An array with the top 25 results
+	* @access Public
+	*/
 	function prioritise_results($input)
 	{
 		$all_courses = array();
@@ -68,4 +131,5 @@ class Keyword_model extends CI_Model
 	}
 }
 
-//EOF
+// End of file keyword_model.php
+// Location: ./models/keyword_model.php

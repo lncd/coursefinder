@@ -4,8 +4,8 @@
 *
 * PHP Version 5
 * 
-* @category  Course Finder
-* @package   Course Finder
+* @category  Course_Finder
+* @package   Course_Finder
 * @author    Jamie Mahoney <jmahoney@lincoln.ac.uk>
 * @copyright 2012 University of Lincoln
 * @license   GNU Affero General Public License 3.0
