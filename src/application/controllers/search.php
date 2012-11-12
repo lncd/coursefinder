@@ -1,7 +1,25 @@
 <?php
+/**
+* Search
+*
+* PHP Version 5
+* 
+* @category  Course Finder
+* @package   Course Finder
+* @author    Jamie Mahoney <jmahoney@lincoln.ac.uk>
+* @copyright 2012 University of Lincoln
+* @license   GNU Affero General Public License 3.0
+* @link      coursedata.blogs.lincoln.ac.uk
+*/
 
 class Search extends CI_Controller {
 
+	/**
+    * Default function for controller. 
+    *
+    * @return Nothing
+    * @access Public
+    */
 	public function index()
 	{	
 		$this->load->view('header');
@@ -9,6 +27,12 @@ class Search extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	/**
+    * Get keywords
+    *
+    * @return Nothing
+    * @access Public
+    */
 	public function keyword()
 	{
 		$search_term = $this->input->get('q');
@@ -19,6 +43,12 @@ class Search extends CI_Controller {
 		echo $results;
 	}
 
+	/**
+    * Orchestrates a search and shows results
+    *
+    * @return Nothing
+    * @access Public
+    */
 	public function results()
 	{
 		$this->load->model('keyword_model');
@@ -93,13 +123,5 @@ class Search extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('results', $data);
 		$this->load->view('footer');
-	}
-
-	function test()
-	{
-		$results = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'programmes/course_code/' . 64));
-		echo '<pre>';
-		print_r($results->result);
-		echo '</pre>';
 	}
 }
