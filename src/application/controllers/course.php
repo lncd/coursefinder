@@ -106,7 +106,6 @@ class Course extends CI_Controller {
         
 
 		//Get all keywords for this search
-        $keyword_results = array();
         $k = new Search_keyword;
         $sik = new Search_instance;
         $sin = new Search_instance;
@@ -121,7 +120,6 @@ class Course extends CI_Controller {
         }
 
         //Get all studied for this search
-        $studied_results = array();
     	$ss = new Search_studied;
     	$ss->where('search_instance_id', $search_id);
     	$studieds = $ss->get_iterated();
@@ -139,7 +137,6 @@ class Course extends CI_Controller {
         }
 
         //Get all interested for this search
-    	$interested_results = array();
     	$si = new Search_interest;
     	$si->where('search_instance_id', $search_id);
     	$interesteds = $si->get_iterated();
