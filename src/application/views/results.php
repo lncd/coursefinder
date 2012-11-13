@@ -7,7 +7,7 @@
 		<?php foreach($course_data as $key => $value) : ?>
 			<h3>Matching <?php echo $key; ?> criteria: </h3>
 			<?php foreach($value as $row): ?>
-				<p><a href="<?php echo base_url(); ?>course/<?php echo $row['id'];?>"><?php echo $row['title']; ?></a></p>
+				<p><a href="<?php echo base_url(); ?>course/<?php echo $row['id'];?>"><?php echo $row['title']; ?></a><i class="icon-star"></i></p>
 			<?php endforeach; ?>
 		<?php endforeach; ?>
 	</section>
