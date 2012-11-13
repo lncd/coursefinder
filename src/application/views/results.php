@@ -6,9 +6,13 @@
 	<section class="span8">
 		<?php foreach($course_data as $key => $value) : ?>
 			<h3>Matching <?php echo $key; ?> criteria: </h3>
+			<table>
 			<?php foreach($value as $row): ?>
-				<p><a href="<?php echo base_url(); ?>course/<?php echo $row['id'];?>"><?php echo $row['title']; ?></a></p>
+				<tr>
+					<td><i class="icon-star" style="margin-right: 5px"></i></td>
+					<td><p><a href="<?php echo base_url(); ?>course/<?php echo $row['id'];?>"><?php echo $row['title']; ?></a></p></td>
 			<?php endforeach; ?>
+			</table>
 		<?php endforeach; ?>
 	</section>
 
