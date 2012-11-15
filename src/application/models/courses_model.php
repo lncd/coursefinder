@@ -46,12 +46,34 @@ class Courses_model extends CI_Model
 	*/
 	function get_course_overviews($id_array)
 	{
+		$this->load->model('search_instance_model');
+
+		$this_search = (int) $this->session->userdata('search_id');
+		$this_instance = new Search_instance;
+		$this_instance->where('id', $this_search)->get();
+
+		$instances = array();
+
+		$all_instances = new Search_instance;
+		$all_instances->where('parameter_count', $this_instance->parameter_count)->get_iterated();
+
+		$this->load->model('search_instance_model');
+
+		foreach($all_instances as $an_instance)
+		{
+			if($this->search_instance_model->check_parameters_match($this_search ,$an_instance->id) === 1)
+			{
+				$instances[] = $an_instance->id;
+			}
+		}
+
+
 		$returning = array();
 
 		foreach($id_array as $a_key => $value)
 		{
 			$results = json_decode(file_get_contents('http://n2/programmes/course_code/' . $a_key));
-			$returning[$value][] = array('id' => $a_key, 'title' => substr_replace($results->result->course_title, '', -8));
+			$returning[$value][] = array('id' => $a_key, 'title' => substr_replace($results->result->course_title, '', -8), 'recommended' => $this->search_instance_model->check_course_recommended($a_key, $instances));
 		}
 
 		return $returning;
