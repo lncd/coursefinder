@@ -41,7 +41,7 @@ class Course extends CI_Controller {
 				$this->courses_model->add_course_click_through($this->session->userdata('search_id'), $this->uri->segment(2));
 			}
 
-			$data['course'] = $this->courses_model->get_course_overview($this->uri->segment(2));
+			$data['course'] = $this->courses_model->get_course($this->uri->segment(2));
 			$data['similar'] = $this->courses_model->get_similar_courses($this->uri->segment(2));
 			$this->load->view('header');
 			$this->load->view('course', $data);
