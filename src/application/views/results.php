@@ -31,6 +31,7 @@
 		</div></ul>-->
 		<p>Search results are generated from the criteria you specified previously.</p>
 		<p>Courses that match the subject areas you specified, as well as the keywords and level of study are returned, and then prioritised based on the amount of criteria they each meet.</p>
-		<p>Some search results are prioritised further when other people have recommended results from similar searches to your specified criteria.</p> 
+		<p>Some search results are prioritised further when other people have recommended results from similar searches to your specified criteria.</p>
+		<p>A <i class="icon-star" style="margin-right: 5px"></i> icon next to the course title shows that a previous user has entered the same criteria as you and has recommended this particular course as being relevant.</p>
 	</section>
 </div>
