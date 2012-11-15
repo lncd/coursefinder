@@ -103,10 +103,7 @@ class Courses_model extends CI_Model
 	*/
 	function add_course_click_through($search_id, $course_id)
 	{
-		$search_click = new Search_click_through;
-		$search_click->search_id = (int) $search_id;
-		$search_click->course_id = (int) $course_id;
-		$search_click->save();
+		
 	}
 
 	/**
@@ -150,11 +147,11 @@ class Courses_model extends CI_Model
 	{
 		$search_rec = new Search_recommended;
 		$search_rec->where('course_id', (int) $course_id);
-		$search_rec->where('search_id', (int) $search_id);
+		$search_rec->where('search_instance_id', (int) $search_id);
 		$search_rec->get();
 
 		$search_rec->course_id = (int) $course_id;
-		$search_rec->search_id = (int) $search_id;
+		$search_rec->search_instance_id = (int) $search_id;
 		$search_rec->save();
 	}
 
@@ -171,7 +168,7 @@ class Courses_model extends CI_Model
 	{
 		$search_rec = new Search_recommended;
 		$search_rec->where('course_id', $course_id);
-		$search_rec->where('search_id', $search_id);
+		$search_rec->where('search_instance_id', $search_id);
 		$search_rec->get();
 		$search_rec->delete();
 	}
@@ -188,7 +185,7 @@ class Courses_model extends CI_Model
 	function check_recommended($course_id, $search_id)
 	{
 		$search_rec = new Search_recommended();
-		$search_rec->get_where(array('course_id' => $course_id, 'search_id' => $search_id));
+		$search_rec->get_where(array('course_id' => $course_id, 'search_instance_id' => $search_id));
 
 		if(isset($search_rec->course_id))
 		{
