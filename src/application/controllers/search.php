@@ -80,9 +80,9 @@ class Search extends CI_Controller {
 		$search_instance->search_time = time();
 		$search_instance->parameter_count = $count_studied + $count_interested + $count_keywords;
 		$search_instance->save();
-
+		
 		//Save current search instance, for tracking click throughs and recommends etc.
-		$this->session->set_userdata(array('search_id' => $search_instance->id));
+		$this->session->set_userdata(array('search_id' => $search_instance->stored->id));
 
 		if($this->input->post('studied'))
 		{
@@ -90,9 +90,8 @@ class Search extends CI_Controller {
 			{
 				//Save search parameters
 				$search_studied = new Search_studied;
-				$search_studied->search_id = $search_instance->id;
 				$search_studied->jacs_code_id = $studied;
-				$search_studied->save();
+				$search_studied->save($search_instance);
 
 				//Get courses by JACS code
 				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($studied);
@@ -105,9 +104,8 @@ class Search extends CI_Controller {
 			{
 				//Save search parameters
 				$search_interest = new Search_interest;
-				$search_interest->search_id = $search_instance->id;
 				$search_interest->jacs_code_id = $interested;
-				$search_interest->save();
+				$search_interest->save($search_instance);
 
 				//Get courses by JACS code
 				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($interested);
@@ -120,9 +118,8 @@ class Search extends CI_Controller {
 			{
 				//Save search parameters
 				$search_keyword = new Search_keyword;
-				$search_keyword->search_id = $search_instance->id;
 				$search_keyword->keyword_id = $keyword;
-				$search_keyword->save();
+				$search_keyword->save($search_instance);
 
 				$results[] = $this->keyword_model->get_course_ids_by_keyword($keyword, 0.5);
 			}

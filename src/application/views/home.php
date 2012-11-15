@@ -42,14 +42,12 @@ $(document).ready(function() {
 		</table>
 		<h4>Add Keywords : </h4>
 		<?php echo form_input(array('name' => 'keywords', 'id' => 'keywords', 'value' => 'This one',  'class' => 'span8')); ?>
-		<h4>Level of Study : </h4>
-		<p>Undergraduate<?php echo form_radio(array('name' => 'level', 'id' => 'level', 'checked' => TRUE, 'value' => 'undergrad', 'style' => 'margin-top: 0px; margin-right: 5px')); ?>
-		Postgraduate<?php echo form_radio(array('name' => 'level', 'id' => 'level', 'checked' => FALSE, 'value' => 'undergrad', 'style' => 'margin-top: 0px; margin-right: 5px')); ?></p>
 		<?php echo form_submit(array('id' => 'submit', 'value' => 'Search', 'class' => 'btn btn-large', 'style' => 'margin-top: 10px')); ?>
 		</form>
 	</section>
 
 	<section class="span4">
-		<p>Some explaining stuffs here. </p> 
+		<p>Select which topic areas you have previously studied, or are interested in as well as adding relevant keywords to your search.</p>
+		<p>Your search results can then be generated.</p> 
 	</section>
 </div>

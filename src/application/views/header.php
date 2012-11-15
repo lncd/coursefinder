@@ -46,7 +46,7 @@
 
 					<hgroup id="cwd-hgroup">
 
-						<h1>Course Finder</h1>
+						<h1>Course Finder<small>ALPHA</small></h1>
 
 					</hgroup>
 
