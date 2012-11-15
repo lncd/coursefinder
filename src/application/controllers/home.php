@@ -44,28 +44,6 @@ class Home extends CI_Controller {
 		$this->load->view('home', $data);
 		$this->load->view('footer');
 	}
-
-	public function test()
-	{
-		$this_search = (int) $this->session->userdata('search_id');
-		$this_instance = new Search_instance;
-		$this_instance->where('id', $this_search)->get();
-
-		$instances = array();
-
-		$all_instances = new Search_instance;
-		$all_instances->where('parameter_count', $this_instance->parameter_count)->get_iterated();
-
-		$this->load->model('search_instance_model');
-
-		foreach($all_instances as $an_instance)
-		{
-			if($this->search_instance_model->check_parameters_match($this_search ,$an_instance->id) === 1)
-			{
-				$instances[] = array();
-			}
-		}
-	}
 }
 
 // End of file home.php
