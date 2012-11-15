@@ -124,7 +124,7 @@ class Keyword_model extends CI_Model
 
 		$id_counts = array_count_values($all_courses);
 		//Sort the ids!
-		arsort($id_counts);
+		arsort($id_counts); 
 
 		$slice = array_slice($id_counts, 0, 25, TRUE);
 		return $slice;

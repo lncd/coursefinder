@@ -9,7 +9,11 @@
 			<table>
 			<?php foreach($value as $row): ?>
 				<tr>
-					<td><i class="icon-star" style="margin-right: 5px"></i></td>
+					<?php if($row['recommended'] > 0) : ?>
+						<td><i class="icon-star" style="margin-right: 5px"></i></td>
+					<?php else: ?>
+						<td></td>
+					<?php endif;?>
 					<td><p><a href="<?php echo base_url(); ?>course/<?php echo $row['id'];?>"><?php echo $row['title']; ?></a></p></td>
 			<?php endforeach; ?>
 			</table>
