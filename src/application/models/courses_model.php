@@ -72,7 +72,7 @@ class Courses_model extends CI_Model
 
 		foreach($id_array as $a_key => $value)
 		{
-			$results = json_decode(file_get_contents('http://n2/programmes/course_code/' . $a_key));
+			$results = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'programmes/course_code/' . $a_key));
 			$returning[$value][] = array('id' => $a_key, 'title' => substr_replace($results->result->course_title, '', -8), 'recommended' => $this->search_instance_model->check_course_recommended($a_key, $instances));
 		}
 
@@ -89,7 +89,7 @@ class Courses_model extends CI_Model
 	*/
 	function get_course($course_id)
 	{
-		return array('data' => json_decode(file_get_contents('http://n2/programmes/course_code/' . $course_id)), 'recommended' => $this->check_recommended($course_id, $this->session->userdata('search_id')));
+		return array('data' => json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'programmes/course_code/' . $course_id)), 'recommended' => $this->check_recommended($course_id, $this->session->userdata('search_id')));
 	}
 
 	/**
@@ -127,7 +127,7 @@ class Courses_model extends CI_Model
 
 		foreach($courses as $course)
 		{
-			$course_info = json_decode(file_get_contents('http://n2/programmes/course_code/' . $course->stored->target_course_id));
+			$course_info = json_decode(file_get_contents($_SERVER['CF_N2_ENDPOINT'] . 'programmes/course_code/' . $course->stored->target_course_id));
 			$results[] = array('id' => $course->stored->target_course_id, 'title' => substr_replace($course_info->result->course_title, '', -8));
 		}
 
