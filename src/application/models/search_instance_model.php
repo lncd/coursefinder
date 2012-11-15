@@ -141,7 +141,7 @@ class Search_instance_model extends CI_Model
 	/**
 	* Get an array of all recommended courses from an array of search instance IDs
 	*
-	* @param int $course_id The ID of the course to check
+	* @param int   $course_id    The ID of the course to check
 	* @param array $instance_ids An array contaning search instance ids
 	* 
 	* @return Array contaning unique course IDs 

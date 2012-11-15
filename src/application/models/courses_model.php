@@ -61,7 +61,7 @@ class Courses_model extends CI_Model
 
 		foreach($all_instances as $an_instance)
 		{
-			if($this->search_instance_model->check_parameters_match($this_search ,$an_instance->id) === 1)
+			if($this->search_instance_model->check_parameters_match($this_search, $an_instance->id) === 1)
 			{
 				$instances[] = $an_instance->id;
 			}
