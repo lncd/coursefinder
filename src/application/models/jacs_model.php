@@ -46,7 +46,7 @@ class Jacs_model extends CI_Model
 	*/
 	function get_course_ids_by_jacs_code($code)
 	{
-		$results = json_decode(file_get_contents('http://n2/course_codes?related_jacs_id=' . $code));
+		$results = json_decode(file_get_contents('https://n2.online.lincoln.ac.uk/course_codes?related_jacs_id=' . $code . '&access_token=' . $_SERVER['N2_TOKEN']));
 		$returning = array();
 
 		foreach($results->results as $result)
