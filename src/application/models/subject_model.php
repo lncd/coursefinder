@@ -1,6 +1,6 @@
 <?php
 /**
-* JACS Model
+* Subject Model
 *
 * PHP Version 5
 * 
@@ -13,7 +13,7 @@
 */
 
 /**
-* JACS Model
+* Subject Model
 *
 * @category Course_Finder
 * @package  Course_Finder
@@ -21,7 +21,8 @@
 * @license  GNU Affero General Public License 3.0
 * @link     coursedata.blogs.lincoln.ac.uk
 */
-class Jacs_model extends CI_Model
+
+class Subject_model extends CI_Model
 {
 
 	/**
@@ -37,26 +38,27 @@ class Jacs_model extends CI_Model
 	}
 	
 	/**
-	* Get course IDs from JACS code
+	* Get like subjects
 	*
-	* @param string $code The JACS code
+	* @param string $term The term to search for
 	*
-	* @return Nothing
+	* @return A JSON string containing like keywords
 	* @access Public
 	*/
-	function get_course_ids_by_jacs_code($code)
+	function get_like_subjects_json($term)
 	{
-		$results = json_decode(file_get_contents('https://n2.online.lincoln.ac.uk/course_codes?related_subject=' . $code . '&access_token=' . $_SERVER['N2_TOKEN']));
-		$returning = array();
-
-		foreach($results->results as $result)
+		$results = $this->db->like('title', $term)->limit(10)->get('subjects');
+		$json_string = '[';
+		foreach($results->result() as $result)
 		{
-			$returning[] = $result->id;
+			$json_string.= '{"id": ' . $result->n2_id . ',"name":"' . $result->title . '"},';
 		}
 
-		return $returning;
+		$json_string = substr_replace($json_string, '', -1);
+		$json_string.= ']';
+		return $json_string;
 	}
 }
 
-// End of file jacs_model.php
-// Location: ./models/jacs_model.php
+// End of file subject_model.php
+// Location: ./models/subject_model.php

@@ -1,6 +1,6 @@
 <?php
 /**
-* Home
+* Subject
 *
 * PHP Version 5
 * 
@@ -13,7 +13,7 @@
 */
 
 /**
-* Home
+* Subject
 *
 * @category Course_Finder
 * @package  Course_Finder
@@ -21,22 +21,15 @@
 * @license  GNU Affero General Public License 3.0
 * @link     coursedata.blogs.lincoln.ac.uk
 */
-
-class Home extends CI_Controller {
+class Subject extends DataMapper {
 
 	/**
-	* Default function for controller. 
+	* Name of the table that the model uses.
 	*
-	* @return Nothing
-	* @access Public
+	* @var string
 	*/
-	public function index()
-	{
-		$this->load->view('header');
-		$this->load->view('home');
-		$this->load->view('footer');
-	}
+	var $table = 'subjects';
 }
 
-// End of file home.php
-// Location: ./controllers/home.php
+// End of file subject.php
+// Location: ./models/subject.php

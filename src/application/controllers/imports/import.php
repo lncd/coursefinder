@@ -47,6 +47,27 @@ class Import extends CI_Controller
 	}
 
 	/**
+	* Imports subjects
+	*
+	* @return Nothing
+	* @access Public
+	*/
+	public function subjects()
+	{
+		$results = json_decode(file_get_contents( $_SERVER['CF_N2_ENDPOINT'] . 'subjects?access_token=' . $_SERVER['N2_TOKEN']));
+
+		foreach($results->results as $subject)
+		{
+			$a_subject = new Subject();
+			$a_subject->n2_id = $subject->id;
+			$a_subject->title = $subject->title;
+			$a_subject->save();
+
+			unset($a_subject);
+		}
+	}
+
+	/**
 	* Imports Course Links. 
 	*
 	* @return Nothing

@@ -53,6 +53,17 @@ class Search extends CI_Controller {
 		echo $results;
 	}
 
+	public function subject()
+	{
+		$search_term = $this->input->get('q');
+
+		$this->load->model('subject_model');
+
+		$results = $this->subject_model->get_like_subjects_json($search_term);
+
+		echo $results;
+	}
+
 	/**
 	* Orchestrates a search and shows results
 	*
@@ -64,11 +75,13 @@ class Search extends CI_Controller {
 		$this->load->model('keyword_model');
 		$this->load->model('jacs_model');
 		$this->load->model('courses_model');
-
+		
 		$results = array();
 
 		//Explode keywords
 		$keywords = explode(',', $this->input->post('keywords'));
+		$studied = explode(',', $this->input->post('studied'));
+		$interested = explode(',', $this->input->post('interested'));
 
 		//Count items
 		$count_studied = count($this->input->post('studied'));
@@ -86,29 +99,29 @@ class Search extends CI_Controller {
 
 		if($this->input->post('studied'))
 		{
-			foreach($this->input->post('studied') as $studied)
+			foreach($studied as $a_studied)
 			{
 				//Save search parameters
 				$search_studied = new Search_studied;
-				$search_studied->jacs_code_id = $studied;
+				$search_studied->jacs_code_id = $a_studied;
 				$search_studied->save($search_instance);
 
 				//Get courses by JACS code
-				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($studied);
+				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($a_studied);
 			}
 		}
 
 		if($this->input->post('interested'))
 		{
-			foreach($this->input->post('interested') as $interested)
+			foreach($interested as $a_interested)
 			{
 				//Save search parameters
 				$search_interest = new Search_interest;
-				$search_interest->jacs_code_id = $interested;
+				$search_interest->jacs_code_id = $a_interested;
 				$search_interest->save($search_instance);
 
 				//Get courses by JACS code
-				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($interested);
+				$results[] = $this->jacs_model->get_course_ids_by_jacs_code($a_interested);
 			}
 		}
 
